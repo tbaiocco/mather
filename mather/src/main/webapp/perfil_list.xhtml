@@ -1,0 +1,48 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton title="#{messages['button.new']}" icon="ui-icon-document" action="#{perfilListMB.getNextView}"
+						actionListener="#{perfilListMB.clear}" ajax="false" />
+
+					<p:commandButton title="#{messages['button.delete']}" icon="ui-icon-trash" onclick="confirmation.show()"
+						type="button" immediate="true" ajax="false" />
+
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.alert']}!" severity="alert" widgetVar="confirmation">
+
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{perfilListMB.deleteSelection}"
+							actionListener="#{perfilListMB.clear}" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:dataTable id="list" var="bean" value="#{perfilListMB.resultList}">
+				<f:facet name="header">#{messages['perfil.list.table.title']}</f:facet>
+				<p:column style="width:1%;">
+					<h:selectBooleanCheckbox value="#{perfilListMB.selection[bean.idPerfil]}"></h:selectBooleanCheckbox>
+				</p:column>
+				
+				<p:column style="width:5%;" sortBy="#{bean.idPerfil}">
+					<f:facet name="header">#{messages['perfil.label.idPerfil']}</f:facet>
+					<h:outputText value="#{bean.idPerfil}" />
+				</p:column>
+						
+				<p:column sortBy="#{bean.nmPerfil}">
+					<f:facet name="header">#{messages['perfil.label.nmPerfil']}</f:facet>
+					<h:commandLink action="#{perfilListMB.getNextView}" actionListener="#{perfilListMB.clear}">
+						<h:outputText value="#{bean.nmPerfil}" />
+						<f:param name="id" value="#{bean.idPerfil}" />
+					</h:commandLink>
+				</p:column>
+						
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

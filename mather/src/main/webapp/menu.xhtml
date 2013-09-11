@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form>
+		<p:menubar>
+			<p:submenu label="#{messages['menu.pais']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/pais_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/pais_list.jsf"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.perfil']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/perfil_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/perfil_list.jsf"></p:menuitem>
+			</p:submenu>
+
+			<p:menuitem value="#{messages['menu.menuitem.quit']}" url="http://www.frameworkdemoiselle.gov.br/"
+				action="#{securityContext.logout}" />
+		</p:menubar>
+	</h:form>
+
+</ui:composition>
