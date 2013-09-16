@@ -101,6 +101,24 @@
 		<class>com.nuovonet.mather.domain.Perfil</class>
 		
 			<class>com.nuovonet.mather.domain.Pais</class>
+			<class>com.nuovonet.mather.domain.Programa</class>
+			<class>com.nuovonet.mather.domain.Sistema</class>
+			<class>com.nuovonet.mather.domain.Numeracao</class>
+			<class>com.nuovonet.mather.domain.TipoAtividade</class>
+			<class>com.nuovonet.mather.domain.TipoChegada</class>
+			<class>com.nuovonet.mather.domain.TipoOcorrencia</class>
+			<class>com.nuovonet.mather.domain.TipoSaida</class>
+			<class>com.nuovonet.mather.domain.TipoServico</class>
+			<class>com.nuovonet.mather.domain.TipoPublicacao</class>
+			<class>com.nuovonet.mather.domain.Menus</class>
+			<class>com.nuovonet.mather.domain.Estado</class>
+			<class>com.nuovonet.mather.domain.Cidade</class>
+			<class>com.nuovonet.mather.domain.Empresa</class>
+			<class>com.nuovonet.mather.domain.Escola</class>
+			<class>com.nuovonet.mather.domain.Pessoa</class>
+			<class>com.nuovonet.mather.domain.Unidade</class>
+			<class>com.nuovonet.mather.domain.Usuario</class>
+			<class>com.nuovonet.mather.domain.LogUsuario</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />

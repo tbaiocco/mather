@@ -126,12 +126,13 @@ ALTER TABLE public.usuarios_sistemas
   OWNER TO mather;
   
 CREATE TABLE log_usuarios (
-	oid_log_usuario bigint not null primary key,
-	oid_usuario bigint not null,
+	id_log_usuario bigint not null primary key,
+	id_usuario bigint not null,
 	recurso varchar(100),
 	informacao varchar(2000),
 	acao varchar(40),
-	data_hora timestamp
+	data_hora timestamp,
+	CONSTRAINT log_us_fk FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario)
 ) with oids;
 ALTER TABLE public.log_usuarios
   OWNER TO mather;

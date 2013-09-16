@@ -2,6 +2,7 @@ package com.nuovonet.mather.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -25,15 +26,11 @@ public class Pais implements Serializable {
 	@Column(name="nm_pais")
 	private String nmPais;
 
-	public Pais() {
-		super();
-	}
+	//bi-directional many-to-one association to Estado
+	@OneToMany(mappedBy="pais")
+	private List<Estado> estados;
 
-	public Pais(Long idPais, String cdPais, String nmPais) {
-		super();
-		this.idPais = idPais;
-		this.cdPais = cdPais;
-		this.nmPais = nmPais;
+	public Pais() {
 	}
 
 	public Long getIdPais() {
@@ -58,6 +55,28 @@ public class Pais implements Serializable {
 
 	public void setNmPais(String nmPais) {
 		this.nmPais = nmPais;
+	}
+
+	public List<Estado> getEstados() {
+		return this.estados;
+	}
+
+	public void setEstados(List<Estado> estados) {
+		this.estados = estados;
+	}
+
+	public Estado addEstado(Estado estado) {
+		getEstados().add(estado);
+		estado.setPais(this);
+
+		return estado;
+	}
+
+	public Estado removeEstado(Estado estado) {
+		getEstados().remove(estado);
+		estado.setPais(null);
+
+		return estado;
 	}
 
 }

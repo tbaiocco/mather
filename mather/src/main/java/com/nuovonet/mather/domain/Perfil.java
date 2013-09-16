@@ -2,6 +2,7 @@ package com.nuovonet.mather.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -22,17 +23,25 @@ public class Perfil implements Serializable {
 	@Column(name="nm_perfil")
 	private String nmPerfil;
 
+	//bi-directional many-to-one association to Usuario
+	@OneToMany(mappedBy="perfi")
+	private List<Usuario> usuarios;
+
+	//bi-directional many-to-many association to Sistema
+	@ManyToMany
+	@JoinTable(
+		name="perfis_sistemas"
+		, joinColumns={
+			@JoinColumn(name="id_perfil")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="id_sistema")
+			}
+		)
+	private List<Sistema> sistemas;
+
 	public Perfil() {
-		super();
 	}
-
-	public Perfil(Long idPerfil, String nmPerfil) {
-		super();
-		this.idPerfil = idPerfil;
-		this.nmPerfil = nmPerfil;
-	}
-
-
 
 	public Long getIdPerfil() {
 		return this.idPerfil;
@@ -48,6 +57,36 @@ public class Perfil implements Serializable {
 
 	public void setNmPerfil(String nmPerfil) {
 		this.nmPerfil = nmPerfil;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return this.usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public Usuario addUsuario(Usuario usuario) {
+		getUsuarios().add(usuario);
+		usuario.setPerfi(this);
+
+		return usuario;
+	}
+
+	public Usuario removeUsuario(Usuario usuario) {
+		getUsuarios().remove(usuario);
+		usuario.setPerfi(null);
+
+		return usuario;
+	}
+
+	public List<Sistema> getSistemas() {
+		return this.sistemas;
+	}
+
+	public void setSistemas(List<Sistema> sistemas) {
+		this.sistemas = sistemas;
 	}
 
 }
