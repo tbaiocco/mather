@@ -1,0 +1,134 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{pessoaEditMB.insert}"
+						rendered="#{!pessoaEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{pessoaEditMB.update}"
+						rendered="#{pessoaEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{pessoaEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{pessoaEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['pessoa.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['pessoa.label.idPessoa']}: " for="idPessoa" styleClass="text-input" />
+					<h:outputText id="idPessoa" value="#{pessoaEditMB.bean.idPessoa}" />
+					<p:message for="idPessoa" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.dmSituacao']}: " for="dmSituacao" styleClass="text-input" />
+					<h:inputText id="dmSituacao" value="#{pessoaEditMB.bean.dmSituacao}"
+						title="#{messages['pessoa.alt.dmSituacao']}" />
+					<p:message for="dmSituacao" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.email']}: " for="email" styleClass="text-input" />
+					<h:inputText id="email" value="#{pessoaEditMB.bean.email}"
+						title="#{messages['pessoa.alt.email']}" />
+					<p:message for="email" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.nmBairro']}: " for="nmBairro" styleClass="text-input" />
+					<h:inputText id="nmBairro" value="#{pessoaEditMB.bean.nmBairro}"
+						title="#{messages['pessoa.alt.nmBairro']}" />
+					<p:message for="nmBairro" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.nmComplemento']}: " for="nmComplemento" styleClass="text-input" />
+					<h:inputText id="nmComplemento" value="#{pessoaEditMB.bean.nmComplemento}"
+						title="#{messages['pessoa.alt.nmComplemento']}" />
+					<p:message for="nmComplemento" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.nmEndereco']}: " for="nmEndereco" styleClass="text-input" />
+					<h:inputText id="nmEndereco" value="#{pessoaEditMB.bean.nmEndereco}"
+						title="#{messages['pessoa.alt.nmEndereco']}" />
+					<p:message for="nmEndereco" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.nmFantasia']}: " for="nmFantasia" styleClass="text-input" />
+					<h:inputText id="nmFantasia" value="#{pessoaEditMB.bean.nmFantasia}"
+						title="#{messages['pessoa.alt.nmFantasia']}" />
+					<p:message for="nmFantasia" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.nmInscricaoEstadual']}: " for="nmInscricaoEstadual" styleClass="text-input" />
+					<h:inputText id="nmInscricaoEstadual" value="#{pessoaEditMB.bean.nmInscricaoEstadual}"
+						title="#{messages['pessoa.alt.nmInscricaoEstadual']}" />
+					<p:message for="nmInscricaoEstadual" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.nmRazaoSocial']}: " for="nmRazaoSocial" styleClass="text-input" />
+					<h:inputText id="nmRazaoSocial" value="#{pessoaEditMB.bean.nmRazaoSocial}"
+						title="#{messages['pessoa.alt.nmRazaoSocial']}" />
+					<p:message for="nmRazaoSocial" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.nmSite']}: " for="nmSite" styleClass="text-input" />
+					<h:inputText id="nmSite" value="#{pessoaEditMB.bean.nmSite}"
+						title="#{messages['pessoa.alt.nmSite']}" />
+					<p:message for="nmSite" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.nrCep']}: " for="nrCep" styleClass="text-input" />
+					<h:inputText id="nrCep" value="#{pessoaEditMB.bean.nrCep}"
+						title="#{messages['pessoa.alt.nrCep']}" />
+					<p:message for="nrCep" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.nrCnpjCpf']}: " for="nrCnpjCpf" styleClass="text-input" />
+					<h:inputText id="nrCnpjCpf" value="#{pessoaEditMB.bean.nrCnpjCpf}"
+						title="#{messages['pessoa.alt.nrCnpjCpf']}" />
+					<p:message for="nrCnpjCpf" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.nrEndereco']}: " for="nrEndereco" styleClass="text-input" />
+					<h:inputText id="nrEndereco" value="#{pessoaEditMB.bean.nrEndereco}"
+						title="#{messages['pessoa.alt.nrEndereco']}" />
+					<p:message for="nrEndereco" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.nrFax']}: " for="nrFax" styleClass="text-input" />
+					<h:inputText id="nrFax" value="#{pessoaEditMB.bean.nrFax}"
+						title="#{messages['pessoa.alt.nrFax']}" />
+					<p:message for="nrFax" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.nrTelefone']}: " for="nrTelefone" styleClass="text-input" />
+					<h:inputText id="nrTelefone" value="#{pessoaEditMB.bean.nrTelefone}"
+						title="#{messages['pessoa.alt.nrTelefone']}" />
+					<p:message for="nrTelefone" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.empresas']}: " for="empresas" styleClass="text-input" />
+					<h:inputText id="empresas" value="#{pessoaEditMB.bean.empresas}"
+						title="#{messages['pessoa.alt.empresas']}" />
+					<p:message for="empresas" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.escolas']}: " for="escolas" styleClass="text-input" />
+					<h:inputText id="escolas" value="#{pessoaEditMB.bean.escolas}"
+						title="#{messages['pessoa.alt.escolas']}" />
+					<p:message for="escolas" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.cidade']}: " for="cidade" styleClass="text-input" />
+					<h:inputText id="cidade" value="#{pessoaEditMB.bean.cidade}"
+						title="#{messages['pessoa.alt.cidade']}" />
+					<p:message for="cidade" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.unidades']}: " for="unidades" styleClass="text-input" />
+					<h:inputText id="unidades" value="#{pessoaEditMB.bean.unidades}"
+						title="#{messages['pessoa.alt.unidades']}" />
+					<p:message for="unidades" />
+					
+					<h:outputLabel value="#{messages['pessoa.label.usuarios']}: " for="usuarios" styleClass="text-input" />
+					<h:inputText id="usuarios" value="#{pessoaEditMB.bean.usuarios}"
+						title="#{messages['pessoa.alt.usuarios']}" />
+					<p:message for="usuarios" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,64 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{programaEditMB.insert}"
+						rendered="#{!programaEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{programaEditMB.update}"
+						rendered="#{programaEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{programaEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{programaEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['programa.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['programa.label.idPrograma']}: " for="idPrograma" styleClass="text-input" />
+					<h:outputText id="idPrograma" value="#{programaEditMB.bean.idPrograma}" />
+					<p:message for="idPrograma" />
+					
+					<h:outputLabel value="#{messages['programa.label.dmTipoPrograma']}: " for="dmTipoPrograma" styleClass="text-input" />
+					<h:inputText id="dmTipoPrograma" value="#{programaEditMB.bean.dmTipoPrograma}"
+						title="#{messages['programa.alt.dmTipoPrograma']}" />
+					<p:message for="dmTipoPrograma" />
+					
+					<h:outputLabel value="#{messages['programa.label.nmArquivo']}: " for="nmArquivo" styleClass="text-input" />
+					<h:inputText id="nmArquivo" value="#{programaEditMB.bean.nmArquivo}"
+						title="#{messages['programa.alt.nmArquivo']}" />
+					<p:message for="nmArquivo" />
+					
+					<h:outputLabel value="#{messages['programa.label.nmCaminho']}: " for="nmCaminho" styleClass="text-input" />
+					<h:inputText id="nmCaminho" value="#{programaEditMB.bean.nmCaminho}"
+						title="#{messages['programa.alt.nmCaminho']}" />
+					<p:message for="nmCaminho" />
+					
+					<h:outputLabel value="#{messages['programa.label.nmPrograma']}: " for="nmPrograma" styleClass="text-input" />
+					<h:inputText id="nmPrograma" value="#{programaEditMB.bean.nmPrograma}"
+						title="#{messages['programa.alt.nmPrograma']}" />
+					<p:message for="nmPrograma" />
+					
+					<h:outputLabel value="#{messages['programa.label.menuses']}: " for="menuses" styleClass="text-input" />
+					<h:inputText id="menuses" value="#{programaEditMB.bean.menuses}"
+						title="#{messages['programa.alt.menuses']}" />
+					<p:message for="menuses" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

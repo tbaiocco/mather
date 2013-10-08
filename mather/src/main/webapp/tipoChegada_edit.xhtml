@@ -1,0 +1,44 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{tipoChegadaEditMB.insert}"
+						rendered="#{!tipoChegadaEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{tipoChegadaEditMB.update}"
+						rendered="#{tipoChegadaEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{tipoChegadaEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{tipoChegadaEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['tipoChegada.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['tipoChegada.label.idTipoChegada']}: " for="idTipoChegada" styleClass="text-input" />
+					<h:outputText id="idTipoChegada" value="#{tipoChegadaEditMB.bean.idTipoChegada}" />
+					<p:message for="idTipoChegada" />
+					
+					<h:outputLabel value="#{messages['tipoChegada.label.nmTipoChegada']}: " for="nmTipoChegada" styleClass="text-input" />
+					<h:inputText id="nmTipoChegada" value="#{tipoChegadaEditMB.bean.nmTipoChegada}"
+						title="#{messages['tipoChegada.alt.nmTipoChegada']}" />
+					<p:message for="nmTipoChegada" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,64 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton title="#{messages['button.new']}" icon="ui-icon-document" action="#{unidadeListMB.getNextView}"
+						actionListener="#{unidadeListMB.clear}" ajax="false" />
+
+					<p:commandButton title="#{messages['button.delete']}" icon="ui-icon-trash" onclick="confirmation.show()"
+						type="button" immediate="true" ajax="false" />
+
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.alert']}!" severity="alert" widgetVar="confirmation">
+
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{unidadeListMB.deleteSelection}"
+							actionListener="#{unidadeListMB.clear}" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:dataTable id="list" var="bean" value="#{unidadeListMB.resultList}">
+				<f:facet name="header">#{messages['unidade.list.table.title']}</f:facet>
+				<p:column style="width:1%;">
+					<h:selectBooleanCheckbox value="#{unidadeListMB.selection[bean.idUnidade]}"></h:selectBooleanCheckbox>
+				</p:column>
+				
+				<p:column style="width:5%;" sortBy="#{bean.idUnidade}">
+					<f:facet name="header">#{messages['unidade.label.idUnidade']}</f:facet>
+					<h:outputText value="#{bean.idUnidade}" />
+				</p:column>
+						
+				<p:column sortBy="#{bean.dmTipoLotacao}">
+					<f:facet name="header">#{messages['unidade.label.dmTipoLotacao']}</f:facet>
+					<h:commandLink action="#{unidadeListMB.getNextView}" actionListener="#{unidadeListMB.clear}">
+						<h:outputText value="#{bean.dmTipoLotacao}" />
+						<f:param name="id" value="#{bean.idUnidade}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.nrCapacidade}">
+					<f:facet name="header">#{messages['unidade.label.nrCapacidade']}</f:facet>
+					<h:commandLink action="#{unidadeListMB.getNextView}" actionListener="#{unidadeListMB.clear}">
+						<h:outputText value="#{bean.nrCapacidade}" />
+						<f:param name="id" value="#{bean.idUnidade}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.pessoa}">
+					<f:facet name="header">#{messages['unidade.label.pessoa']}</f:facet>
+					<h:commandLink action="#{unidadeListMB.getNextView}" actionListener="#{unidadeListMB.clear}">
+						<h:outputText value="#{bean.pessoa}" />
+						<f:param name="id" value="#{bean.idUnidade}" />
+					</h:commandLink>
+				</p:column>
+						
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

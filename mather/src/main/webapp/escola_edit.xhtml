@@ -1,0 +1,54 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{escolaEditMB.insert}"
+						rendered="#{!escolaEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{escolaEditMB.update}"
+						rendered="#{escolaEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{escolaEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{escolaEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['escola.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['escola.label.idEscola']}: " for="idEscola" styleClass="text-input" />
+					<h:outputText id="idEscola" value="#{escolaEditMB.bean.idEscola}" />
+					<p:message for="idEscola" />
+					
+					<h:outputLabel value="#{messages['escola.label.dmTipoEscola']}: " for="dmTipoEscola" styleClass="text-input" />
+					<h:inputText id="dmTipoEscola" value="#{escolaEditMB.bean.dmTipoEscola}"
+						title="#{messages['escola.alt.dmTipoEscola']}" />
+					<p:message for="dmTipoEscola" />
+					
+					<h:outputLabel value="#{messages['escola.label.nmContato']}: " for="nmContato" styleClass="text-input" />
+					<h:inputText id="nmContato" value="#{escolaEditMB.bean.nmContato}"
+						title="#{messages['escola.alt.nmContato']}" />
+					<p:message for="nmContato" />
+					
+					<h:outputLabel value="#{messages['escola.label.pessoa']}: " for="pessoa" styleClass="text-input" />
+					<h:inputText id="pessoa" value="#{escolaEditMB.bean.pessoa}"
+						title="#{messages['escola.alt.pessoa']}" />
+					<p:message for="pessoa" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

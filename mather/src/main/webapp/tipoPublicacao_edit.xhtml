@@ -1,0 +1,54 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{tipoPublicacaoEditMB.insert}"
+						rendered="#{!tipoPublicacaoEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{tipoPublicacaoEditMB.update}"
+						rendered="#{tipoPublicacaoEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{tipoPublicacaoEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{tipoPublicacaoEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['tipoPublicacao.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['tipoPublicacao.label.idTipoPublicacao']}: " for="idTipoPublicacao" styleClass="text-input" />
+					<h:outputText id="idTipoPublicacao" value="#{tipoPublicacaoEditMB.bean.idTipoPublicacao}" />
+					<p:message for="idTipoPublicacao" />
+					
+					<h:outputLabel value="#{messages['tipoPublicacao.label.dmNumeracao']}: " for="dmNumeracao" styleClass="text-input" />
+					<h:inputText id="dmNumeracao" value="#{tipoPublicacaoEditMB.bean.dmNumeracao}"
+						title="#{messages['tipoPublicacao.alt.dmNumeracao']}" />
+					<p:message for="dmNumeracao" />
+					
+					<h:outputLabel value="#{messages['tipoPublicacao.label.nmTipoPublicacao']}: " for="nmTipoPublicacao" styleClass="text-input" />
+					<h:inputText id="nmTipoPublicacao" value="#{tipoPublicacaoEditMB.bean.nmTipoPublicacao}"
+						title="#{messages['tipoPublicacao.alt.nmTipoPublicacao']}" />
+					<p:message for="nmTipoPublicacao" />
+					
+					<h:outputLabel value="#{messages['tipoPublicacao.label.numeracoe']}: " for="numeracoe" styleClass="text-input" />
+					<h:inputText id="numeracoe" value="#{tipoPublicacaoEditMB.bean.numeracoe}"
+						title="#{messages['tipoPublicacao.alt.numeracoe']}" />
+					<p:message for="numeracoe" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

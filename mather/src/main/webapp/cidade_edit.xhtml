@@ -1,0 +1,59 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{cidadeEditMB.insert}"
+						rendered="#{!cidadeEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{cidadeEditMB.update}"
+						rendered="#{cidadeEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{cidadeEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{cidadeEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['cidade.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['cidade.label.idCidade']}: " for="idCidade" styleClass="text-input" />
+					<h:outputText id="idCidade" value="#{cidadeEditMB.bean.idCidade}" />
+					<p:message for="idCidade" />
+					
+					<h:outputLabel value="#{messages['cidade.label.cdCidade']}: " for="cdCidade" styleClass="text-input" />
+					<h:inputText id="cdCidade" value="#{cidadeEditMB.bean.cdCidade}"
+						title="#{messages['cidade.alt.cdCidade']}" />
+					<p:message for="cdCidade" />
+					
+					<h:outputLabel value="#{messages['cidade.label.nmCidade']}: " for="nmCidade" styleClass="text-input" />
+					<h:inputText id="nmCidade" value="#{cidadeEditMB.bean.nmCidade}"
+						title="#{messages['cidade.alt.nmCidade']}" />
+					<p:message for="nmCidade" />
+					
+					<h:outputLabel value="#{messages['cidade.label.estado']}: " for="estado" styleClass="text-input" />
+					<h:inputText id="estado" value="#{cidadeEditMB.bean.estado}"
+						title="#{messages['cidade.alt.estado']}" />
+					<p:message for="estado" />
+					
+					<h:outputLabel value="#{messages['cidade.label.pessoas']}: " for="pessoas" styleClass="text-input" />
+					<h:inputText id="pessoas" value="#{cidadeEditMB.bean.pessoas}"
+						title="#{messages['cidade.alt.pessoas']}" />
+					<p:message for="pessoas" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

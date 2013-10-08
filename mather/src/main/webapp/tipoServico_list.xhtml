@@ -1,0 +1,48 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton title="#{messages['button.new']}" icon="ui-icon-document" action="#{tipoServicoListMB.getNextView}"
+						actionListener="#{tipoServicoListMB.clear}" ajax="false" />
+
+					<p:commandButton title="#{messages['button.delete']}" icon="ui-icon-trash" onclick="confirmation.show()"
+						type="button" immediate="true" ajax="false" />
+
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.alert']}!" severity="alert" widgetVar="confirmation">
+
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{tipoServicoListMB.deleteSelection}"
+							actionListener="#{tipoServicoListMB.clear}" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:dataTable id="list" var="bean" value="#{tipoServicoListMB.resultList}">
+				<f:facet name="header">#{messages['tipoServico.list.table.title']}</f:facet>
+				<p:column style="width:1%;">
+					<h:selectBooleanCheckbox value="#{tipoServicoListMB.selection[bean.idTipoServico]}"></h:selectBooleanCheckbox>
+				</p:column>
+				
+				<p:column style="width:5%;" sortBy="#{bean.idTipoServico}">
+					<f:facet name="header">#{messages['tipoServico.label.idTipoServico']}</f:facet>
+					<h:outputText value="#{bean.idTipoServico}" />
+				</p:column>
+						
+				<p:column sortBy="#{bean.nmTipoServico}">
+					<f:facet name="header">#{messages['tipoServico.label.nmTipoServico']}</f:facet>
+					<h:commandLink action="#{tipoServicoListMB.getNextView}" actionListener="#{tipoServicoListMB.clear}">
+						<h:outputText value="#{bean.nmTipoServico}" />
+						<f:param name="id" value="#{bean.idTipoServico}" />
+					</h:commandLink>
+				</p:column>
+						
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

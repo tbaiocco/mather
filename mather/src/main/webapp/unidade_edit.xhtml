@@ -1,0 +1,54 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{unidadeEditMB.insert}"
+						rendered="#{!unidadeEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{unidadeEditMB.update}"
+						rendered="#{unidadeEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{unidadeEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{unidadeEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['unidade.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['unidade.label.idUnidade']}: " for="idUnidade" styleClass="text-input" />
+					<h:outputText id="idUnidade" value="#{unidadeEditMB.bean.idUnidade}" />
+					<p:message for="idUnidade" />
+					
+					<h:outputLabel value="#{messages['unidade.label.dmTipoLotacao']}: " for="dmTipoLotacao" styleClass="text-input" />
+					<h:inputText id="dmTipoLotacao" value="#{unidadeEditMB.bean.dmTipoLotacao}"
+						title="#{messages['unidade.alt.dmTipoLotacao']}" />
+					<p:message for="dmTipoLotacao" />
+					
+					<h:outputLabel value="#{messages['unidade.label.nrCapacidade']}: " for="nrCapacidade" styleClass="text-input" />
+					<h:inputText id="nrCapacidade" value="#{unidadeEditMB.bean.nrCapacidade}"
+						title="#{messages['unidade.alt.nrCapacidade']}" />
+					<p:message for="nrCapacidade" />
+					
+					<h:outputLabel value="#{messages['unidade.label.pessoa']}: " for="pessoa" styleClass="text-input" />
+					<h:inputText id="pessoa" value="#{unidadeEditMB.bean.pessoa}"
+						title="#{messages['unidade.alt.pessoa']}" />
+					<p:message for="pessoa" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,60 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{estadoEditMB.insert}"
+						rendered="#{!estadoEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{estadoEditMB.update}"
+						rendered="#{estadoEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{estadoEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{estadoEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['estado.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['estado.label.idEstado']}: " for="idEstado" styleClass="text-input" />
+					<h:outputText id="idEstado" value="#{estadoEditMB.bean.idEstado}" />
+					<p:message for="idEstado" />
+					
+					<h:outputLabel value="#{messages['estado.label.cdEstado']}: " for="cdEstado" styleClass="text-input" />
+					<h:inputText id="cdEstado" value="#{estadoEditMB.bean.cdEstado}"
+						title="#{messages['estado.alt.cdEstado']}" />
+					<p:message for="cdEstado" />
+					
+					<h:outputLabel value="#{messages['estado.label.nmEstado']}: " for="nmEstado" styleClass="text-input" />
+					<h:inputText id="nmEstado" value="#{estadoEditMB.bean.nmEstado}"
+						title="#{messages['estado.alt.nmEstado']}" />
+					<p:message for="nmEstado" />
+					
+					<h:outputLabel value="#{messages['estado.label.pais']}: " for="pais" styleClass="text-input" />
+					<h:selectOneMenu id="pais" value="#{estadoEditMB.bean.pais}" title="#{messages['estado.alt.pais']}" converter="#{paisesConverter}">
+						<f:selectItems
+						value="#{paisListMB.resultList}" 
+						var="paisIt"
+						itemLabel="#{paisIt.cdPais} - #{paisIt.nmPais}"
+						itemValue="#{paisIt}"
+						/>
+					</h:selectOneMenu>
+					<p:message for="pais"  />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

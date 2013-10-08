@@ -1,0 +1,80 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton title="#{messages['button.new']}" icon="ui-icon-document" action="#{programaListMB.getNextView}"
+						actionListener="#{programaListMB.clear}" ajax="false" />
+
+					<p:commandButton title="#{messages['button.delete']}" icon="ui-icon-trash" onclick="confirmation.show()"
+						type="button" immediate="true" ajax="false" />
+
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.alert']}!" severity="alert" widgetVar="confirmation">
+
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{programaListMB.deleteSelection}"
+							actionListener="#{programaListMB.clear}" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:dataTable id="list" var="bean" value="#{programaListMB.resultList}">
+				<f:facet name="header">#{messages['programa.list.table.title']}</f:facet>
+				<p:column style="width:1%;">
+					<h:selectBooleanCheckbox value="#{programaListMB.selection[bean.idPrograma]}"></h:selectBooleanCheckbox>
+				</p:column>
+				
+				<p:column style="width:5%;" sortBy="#{bean.idPrograma}">
+					<f:facet name="header">#{messages['programa.label.idPrograma']}</f:facet>
+					<h:outputText value="#{bean.idPrograma}" />
+				</p:column>
+						
+				<p:column sortBy="#{bean.dmTipoPrograma}">
+					<f:facet name="header">#{messages['programa.label.dmTipoPrograma']}</f:facet>
+					<h:commandLink action="#{programaListMB.getNextView}" actionListener="#{programaListMB.clear}">
+						<h:outputText value="#{bean.dmTipoPrograma}" />
+						<f:param name="id" value="#{bean.idPrograma}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.nmArquivo}">
+					<f:facet name="header">#{messages['programa.label.nmArquivo']}</f:facet>
+					<h:commandLink action="#{programaListMB.getNextView}" actionListener="#{programaListMB.clear}">
+						<h:outputText value="#{bean.nmArquivo}" />
+						<f:param name="id" value="#{bean.idPrograma}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.nmCaminho}">
+					<f:facet name="header">#{messages['programa.label.nmCaminho']}</f:facet>
+					<h:commandLink action="#{programaListMB.getNextView}" actionListener="#{programaListMB.clear}">
+						<h:outputText value="#{bean.nmCaminho}" />
+						<f:param name="id" value="#{bean.idPrograma}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.nmPrograma}">
+					<f:facet name="header">#{messages['programa.label.nmPrograma']}</f:facet>
+					<h:commandLink action="#{programaListMB.getNextView}" actionListener="#{programaListMB.clear}">
+						<h:outputText value="#{bean.nmPrograma}" />
+						<f:param name="id" value="#{bean.idPrograma}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.menuses}">
+					<f:facet name="header">#{messages['programa.label.menuses']}</f:facet>
+					<h:commandLink action="#{programaListMB.getNextView}" actionListener="#{programaListMB.clear}">
+						<h:outputText value="#{bean.menuses}" />
+						<f:param name="id" value="#{bean.idPrograma}" />
+					</h:commandLink>
+				</p:column>
+						
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

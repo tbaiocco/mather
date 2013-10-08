@@ -1,0 +1,96 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton title="#{messages['button.new']}" icon="ui-icon-document" action="#{numeracaoListMB.getNextView}"
+						actionListener="#{numeracaoListMB.clear}" ajax="false" />
+
+					<p:commandButton title="#{messages['button.delete']}" icon="ui-icon-trash" onclick="confirmation.show()"
+						type="button" immediate="true" ajax="false" />
+
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.alert']}!" severity="alert" widgetVar="confirmation">
+
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{numeracaoListMB.deleteSelection}"
+							actionListener="#{numeracaoListMB.clear}" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:dataTable id="list" var="bean" value="#{numeracaoListMB.resultList}">
+				<f:facet name="header">#{messages['numeracao.list.table.title']}</f:facet>
+				<p:column style="width:1%;">
+					<h:selectBooleanCheckbox value="#{numeracaoListMB.selection[bean.idNumeracao]}"></h:selectBooleanCheckbox>
+				</p:column>
+				
+				<p:column style="width:5%;" sortBy="#{bean.idNumeracao}">
+					<f:facet name="header">#{messages['numeracao.label.idNumeracao']}</f:facet>
+					<h:outputText value="#{bean.idNumeracao}" />
+				</p:column>
+						
+				<p:column sortBy="#{bean.dmTipoImpressao}">
+					<f:facet name="header">#{messages['numeracao.label.dmTipoImpressao']}</f:facet>
+					<h:commandLink action="#{numeracaoListMB.getNextView}" actionListener="#{numeracaoListMB.clear}">
+						<h:outputText value="#{bean.dmTipoImpressao}" />
+						<f:param name="id" value="#{bean.idNumeracao}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.nmNumeracao}">
+					<f:facet name="header">#{messages['numeracao.label.nmNumeracao']}</f:facet>
+					<h:commandLink action="#{numeracaoListMB.getNextView}" actionListener="#{numeracaoListMB.clear}">
+						<h:outputText value="#{bean.nmNumeracao}" />
+						<f:param name="id" value="#{bean.idNumeracao}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.nmSerie}">
+					<f:facet name="header">#{messages['numeracao.label.nmSerie']}</f:facet>
+					<h:commandLink action="#{numeracaoListMB.getNextView}" actionListener="#{numeracaoListMB.clear}">
+						<h:outputText value="#{bean.nmSerie}" />
+						<f:param name="id" value="#{bean.idNumeracao}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.nrFinal}">
+					<f:facet name="header">#{messages['numeracao.label.nrFinal']}</f:facet>
+					<h:commandLink action="#{numeracaoListMB.getNextView}" actionListener="#{numeracaoListMB.clear}">
+						<h:outputText value="#{bean.nrFinal}" />
+						<f:param name="id" value="#{bean.idNumeracao}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.nrInicial}">
+					<f:facet name="header">#{messages['numeracao.label.nrInicial']}</f:facet>
+					<h:commandLink action="#{numeracaoListMB.getNextView}" actionListener="#{numeracaoListMB.clear}">
+						<h:outputText value="#{bean.nrInicial}" />
+						<f:param name="id" value="#{bean.idNumeracao}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.nrProximo}">
+					<f:facet name="header">#{messages['numeracao.label.nrProximo']}</f:facet>
+					<h:commandLink action="#{numeracaoListMB.getNextView}" actionListener="#{numeracaoListMB.clear}">
+						<h:outputText value="#{bean.nrProximo}" />
+						<f:param name="id" value="#{bean.idNumeracao}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.tiposPublicacoes}">
+					<f:facet name="header">#{messages['numeracao.label.tiposPublicacoes']}</f:facet>
+					<h:commandLink action="#{numeracaoListMB.getNextView}" actionListener="#{numeracaoListMB.clear}">
+						<h:outputText value="#{bean.tiposPublicacoes}" />
+						<f:param name="id" value="#{bean.idNumeracao}" />
+					</h:commandLink>
+				</p:column>
+						
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
