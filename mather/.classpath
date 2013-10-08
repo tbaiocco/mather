@@ -33,6 +33,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/postgresql-9.2-1002.jdbc4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/postgresql"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

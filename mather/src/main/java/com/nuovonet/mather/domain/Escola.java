@@ -3,6 +3,9 @@ package com.nuovonet.mather.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.nuovonet.mather.domain.util.AbstractEntity;
+import com.nuovonet.mather.util.Utilitaria;
+
 
 /**
  * The persistent class for the escolas database table.
@@ -11,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="escolas")
 @NamedQuery(name="Escola.findAll", query="SELECT e FROM Escola e")
-public class Escola implements Serializable {
+public class Escola extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -38,6 +41,7 @@ public class Escola implements Serializable {
 	}
 
 	public void setIdEscola(Long idEscola) {
+		super.setId(idEscola);
 		this.idEscola = idEscola;
 	}
 
@@ -64,5 +68,29 @@ public class Escola implements Serializable {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
+	@Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idEscola != null ? idEscola.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Escola)) {
+            return false;
+        }
+        Escola other = (Escola) object;
+        if ((this.idEscola == null && other.idEscola != null) 
+        		|| (this.idEscola != null && !this.idEscola.equals(other.idEscola))) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+    	return Utilitaria.getValueDef(this.getIdEscola().toString(),"");
+    }
 }

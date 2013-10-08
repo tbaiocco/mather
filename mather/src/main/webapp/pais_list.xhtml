@@ -49,6 +49,14 @@
 					</h:commandLink>
 				</p:column>
 						
+				<p:column sortBy="#{bean.estados}">
+					<f:facet name="header">#{messages['pais.label.estados']}</f:facet>
+					<h:commandLink action="#{paisListMB.getNextView}" actionListener="#{paisListMB.clear}">
+						<h:outputText value="#{bean.estados}" />
+						<f:param name="id" value="#{bean.idPais}" />
+					</h:commandLink>
+				</p:column>
+						
 			</p:dataTable>
 		</h:form>
 

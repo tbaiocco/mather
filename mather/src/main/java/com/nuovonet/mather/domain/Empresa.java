@@ -3,6 +3,9 @@ package com.nuovonet.mather.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.nuovonet.mather.domain.util.AbstractEntity;
+import com.nuovonet.mather.util.Utilitaria;
+
 
 /**
  * The persistent class for the empresas database table.
@@ -11,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="empresas")
 @NamedQuery(name="Empresa.findAll", query="SELECT e FROM Empresa e")
-public class Empresa implements Serializable {
+public class Empresa extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -38,6 +41,7 @@ public class Empresa implements Serializable {
 	}
 
 	public void setIdEmpresa(Long idEmpresa) {
+		super.setId(idEmpresa);
 		this.idEmpresa = idEmpresa;
 	}
 
@@ -64,5 +68,28 @@ public class Empresa implements Serializable {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
+	@Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idEmpresa != null ? idEmpresa.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Empresa)) {
+            return false;
+        }
+        Empresa other = (Empresa) object;
+        if ((this.idEmpresa == null && other.idEmpresa != null) || (this.idEmpresa != null && !this.idEmpresa.equals(other.idEmpresa))) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+    	return Utilitaria.getValueDef(this.getIdEmpresa().toString(),"");
+    }
 }

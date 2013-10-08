@@ -1,4 +1,4 @@
-activeProfiles=tomcat7
+activeProfiles=tomcat7, tomcat7
 eclipse.preferences.version=1
 resolveWorkspaceProjects=true
 version=1

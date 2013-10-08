@@ -2,6 +2,10 @@ package com.nuovonet.mather.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.nuovonet.mather.domain.util.AbstractEntity;
+import com.nuovonet.mather.util.Utilitaria;
+
 import java.util.List;
 
 
@@ -12,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name="cidades")
 @NamedQuery(name="Cidade.findAll", query="SELECT c FROM Cidade c")
-public class Cidade implements Serializable {
+public class Cidade extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -43,6 +47,7 @@ public class Cidade implements Serializable {
 	}
 
 	public void setIdCidade(Long idCidade) {
+		super.setId(idCidade);
 		this.idCidade = idCidade;
 	}
 
@@ -91,5 +96,29 @@ public class Cidade implements Serializable {
 
 		return pessoa;
 	}
+	@Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idCidade != null ? idCidade.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Cidade)) {
+            return false;
+        }
+        Cidade other = (Cidade) object;
+        if ((this.idCidade == null && other.idCidade != null) 
+        		|| (this.idCidade != null && !this.idCidade.equals(other.idCidade))) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+    	return Utilitaria.getValueDef(this.getNmCidade(),"");
+    }
 }

@@ -2,8 +2,11 @@ package com.nuovonet.mather.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
+import com.nuovonet.mather.util.Utilitaria;
+
+import java.util.List;
+import com.nuovonet.mather.domain.util.AbstractEntity;
 
 /**
  * The persistent class for the sistemas database table.
@@ -12,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name="sistemas")
 @NamedQuery(name="Sistema.findAll", query="SELECT s FROM Sistema s")
-public class Sistema implements Serializable {
+public class Sistema extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -39,6 +42,7 @@ public class Sistema implements Serializable {
 	}
 
 	public void setIdSistema(Long idSistema) {
+		super.setId(idSistema);
 		this.idSistema = idSistema;
 	}
 
@@ -65,5 +69,29 @@ public class Sistema implements Serializable {
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
+	@Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idSistema != null ? idSistema.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Sistema)) {
+            return false;
+        }
+        Sistema other = (Sistema) object;
+        if ((this.idSistema == null && other.idSistema != null) 
+        		|| (this.idSistema != null && !this.idSistema.equals(other.idSistema))) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+    	return Utilitaria.getValueDef(this.getNmSistema(),"");
+    }
 }

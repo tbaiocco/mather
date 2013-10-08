@@ -2,8 +2,11 @@ package com.nuovonet.mather.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigDecimal;
 
+import com.nuovonet.mather.util.Utilitaria;
+
+import java.math.BigDecimal;
+import com.nuovonet.mather.domain.util.AbstractEntity;
 
 /**
  * The persistent class for the unidades database table.
@@ -12,7 +15,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name="unidades")
 @NamedQuery(name="Unidade.findAll", query="SELECT u FROM Unidade u")
-public class Unidade implements Serializable {
+public class Unidade extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -39,6 +42,7 @@ public class Unidade implements Serializable {
 	}
 
 	public void setIdUnidade(Long idUnidade) {
+		super.setId(idUnidade);
 		this.idUnidade = idUnidade;
 	}
 
@@ -65,5 +69,29 @@ public class Unidade implements Serializable {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
+	@Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idUnidade != null ? idUnidade.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Unidade)) {
+            return false;
+        }
+        Unidade other = (Unidade) object;
+        if ((this.idUnidade == null && other.idUnidade != null) 
+        		|| (this.idUnidade != null && !this.idUnidade.equals(other.idUnidade))) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+    	return Utilitaria.getValueDef(this.getIdUnidade().toString(),"");
+    }
 }

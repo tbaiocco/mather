@@ -3,9 +3,15 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
 
 	<ui:define name="body">
-		<p:panel>
-			#{messages['main.app.welcome']}
+		<p:panel header="#{messages['main.app.title']}" footer="#{messages['main.footer.text']}">
+			<h:outputText style="align: center;" value="#{messages['main.app.welcome']}" />
 		</p:panel>
+		<h:panelGrid>
+			<h3 align="center">Calendar</h3>
+			<h:form>
+			<p:calendar mode="inline"/>
+			</h:form>
+		</h:panelGrid>
 	</ui:define>
 
 </ui:composition>

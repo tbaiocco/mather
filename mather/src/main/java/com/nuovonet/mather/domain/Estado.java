@@ -2,6 +2,10 @@ package com.nuovonet.mather.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.nuovonet.mather.domain.util.AbstractEntity;
+import com.nuovonet.mather.util.Utilitaria;
+
 import java.util.List;
 
 
@@ -12,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name="estados")
 @NamedQuery(name="Estado.findAll", query="SELECT e FROM Estado e")
-public class Estado implements Serializable {
+public class Estado extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -27,11 +31,11 @@ public class Estado implements Serializable {
 	private String nmEstado;
 
 	//bi-directional many-to-one association to Cidade
-	@OneToMany(mappedBy="estado")
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="estado")
 	private List<Cidade> cidades;
 
 	//bi-directional many-to-one association to Pais
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="id_pais")
 	private Pais pais;
 
@@ -43,6 +47,7 @@ public class Estado implements Serializable {
 	}
 
 	public void setIdEstado(Long idEstado) {
+		super.setId(idEstado);
 		this.idEstado = idEstado;
 	}
 
@@ -92,4 +97,29 @@ public class Estado implements Serializable {
 		this.pais = pais;
 	}
 
+	@Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idEstado != null ? idEstado.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Estado)) {
+            return false;
+        }
+        Estado other = (Estado) object;
+        if ((this.idEstado == null && other.idEstado != null) 
+        		|| (this.idEstado != null && !this.idEstado.equals(other.idEstado))) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+    	return Utilitaria.getValueDef(this.getCdEstado(),"") + " / " + Utilitaria.getValueDef(this.getPais().getCdPais(),"");
+    }
 }

@@ -3,6 +3,8 @@ package com.nuovonet.mather.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.nuovonet.mather.util.Utilitaria;
+import com.nuovonet.mather.domain.util.AbstractEntity;
 
 /**
  * The persistent class for the tipos_publicacoes database table.
@@ -11,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="tipos_publicacoes")
 @NamedQuery(name="TipoPublicacao.findAll", query="SELECT t FROM TipoPublicacao t")
-public class TipoPublicacao implements Serializable {
+public class TipoPublicacao extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -38,6 +40,7 @@ public class TipoPublicacao implements Serializable {
 	}
 
 	public void setIdTipoPublicacao(Long idTipoPublicacao) {
+		super.setId(idTipoPublicacao);
 		this.idTipoPublicacao = idTipoPublicacao;
 	}
 
@@ -64,5 +67,29 @@ public class TipoPublicacao implements Serializable {
 	public void setNumeracoe(Numeracao numeracoe) {
 		this.numeracoe = numeracoe;
 	}
+	@Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idTipoPublicacao != null ? idTipoPublicacao.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof TipoPublicacao)) {
+            return false;
+        }
+        TipoPublicacao other = (TipoPublicacao) object;
+        if ((this.idTipoPublicacao == null && other.idTipoPublicacao != null) 
+        		|| (this.idTipoPublicacao != null && !this.idTipoPublicacao.equals(other.idTipoPublicacao))) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+    	return Utilitaria.getValueDef(this.getNmTipoPublicacao(),"");
+    }
 }

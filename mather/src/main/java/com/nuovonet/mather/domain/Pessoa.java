@@ -2,8 +2,11 @@ package com.nuovonet.mather.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
+import com.nuovonet.mather.util.Utilitaria;
+
+import java.util.List;
+import com.nuovonet.mather.domain.util.AbstractEntity;
 
 /**
  * The persistent class for the pessoas database table.
@@ -12,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name="pessoas")
 @NamedQuery(name="Pessoa.findAll", query="SELECT p FROM Pessoa p")
-public class Pessoa implements Serializable {
+public class Pessoa extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -90,6 +93,7 @@ public class Pessoa implements Serializable {
 	}
 
 	public void setIdPessoa(Long idPessoa) {
+		super.setId(idPessoa);
 		this.idPessoa = idPessoa;
 	}
 
@@ -300,5 +304,29 @@ public class Pessoa implements Serializable {
 
 		return usuario;
 	}
+	@Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idPessoa != null ? idPessoa.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Pessoa)) {
+            return false;
+        }
+        Pessoa other = (Pessoa) object;
+        if ((this.idPessoa == null && other.idPessoa != null) 
+        		|| (this.idPessoa != null && !this.idPessoa.equals(other.idPessoa))) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+    	return Utilitaria.getValueDef(this.getNmRazaoSocial(),"");
+    }
 }

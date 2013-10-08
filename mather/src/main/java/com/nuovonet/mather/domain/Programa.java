@@ -2,8 +2,11 @@ package com.nuovonet.mather.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
+import com.nuovonet.mather.util.Utilitaria;
+
+import java.util.List;
+import com.nuovonet.mather.domain.util.AbstractEntity;
 
 /**
  * The persistent class for the programas database table.
@@ -12,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name="programas")
 @NamedQuery(name="Programa.findAll", query="SELECT p FROM Programa p")
-public class Programa implements Serializable {
+public class Programa extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -43,7 +46,7 @@ public class Programa implements Serializable {
 			@JoinColumn(name="id_menu")
 			}
 		)
-	private List<Menus> menuses;
+	private List<Menu> menuses;
 
 	public Programa() {
 	}
@@ -53,6 +56,7 @@ public class Programa implements Serializable {
 	}
 
 	public void setIdPrograma(Long idPrograma) {
+		super.setId(idPrograma);
 		this.idPrograma = idPrograma;
 	}
 
@@ -88,12 +92,36 @@ public class Programa implements Serializable {
 		this.nmPrograma = nmPrograma;
 	}
 
-	public List<Menus> getMenuses() {
+	public List<Menu> getMenuses() {
 		return this.menuses;
 	}
 
-	public void setMenuses(List<Menus> menuses) {
+	public void setMenuses(List<Menu> menuses) {
 		this.menuses = menuses;
 	}
+	@Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idPrograma != null ? idPrograma.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Programa)) {
+            return false;
+        }
+        Programa other = (Programa) object;
+        if ((this.idPrograma == null && other.idPrograma != null) 
+        		|| (this.idPrograma != null && !this.idPrograma.equals(other.idPrograma))) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+    	return Utilitaria.getValueDef(this.getNmPrograma(),"");
+    }
 }

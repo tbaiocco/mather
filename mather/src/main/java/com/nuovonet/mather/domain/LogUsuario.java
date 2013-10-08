@@ -2,6 +2,10 @@ package com.nuovonet.mather.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.nuovonet.mather.domain.util.AbstractEntity;
+import com.nuovonet.mather.util.Utilitaria;
+
 import java.sql.Timestamp;
 
 
@@ -12,7 +16,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="log_usuarios")
 @NamedQuery(name="LogUsuario.findAll", query="SELECT l FROM LogUsuario l")
-public class LogUsuario implements Serializable {
+public class LogUsuario extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -42,6 +46,7 @@ public class LogUsuario implements Serializable {
 	}
 
 	public void setIdLogUsuario(Long idLogUsuario) {
+		super.setId(idLogUsuario);
 		this.idLogUsuario = idLogUsuario;
 	}
 
@@ -84,5 +89,29 @@ public class LogUsuario implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	@Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idLogUsuario != null ? idLogUsuario.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof LogUsuario)) {
+            return false;
+        }
+        LogUsuario other = (LogUsuario) object;
+        if ((this.idLogUsuario == null && other.idLogUsuario != null) 
+        		|| (this.idLogUsuario != null && !this.idLogUsuario.equals(other.idLogUsuario))) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+    	return Utilitaria.getValueDef(this.getIdLogUsuario().toString(),"");
+    }
 }

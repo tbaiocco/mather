@@ -2,9 +2,12 @@ package com.nuovonet.mather.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.nuovonet.mather.util.Utilitaria;
+
 import java.math.BigDecimal;
 import java.util.List;
-
+import com.nuovonet.mather.domain.util.AbstractEntity;
 
 /**
  * The persistent class for the numeracoes database table.
@@ -13,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name="numeracoes")
 @NamedQuery(name="Numeracao.findAll", query="SELECT n FROM Numeracao n")
-public class Numeracao implements Serializable {
+public class Numeracao extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -51,6 +54,7 @@ public class Numeracao implements Serializable {
 	}
 
 	public void setIdNumeracao(Long idNumeracao) {
+		super.setId(idNumeracao);
 		this.idNumeracao = idNumeracao;
 	}
 
@@ -123,5 +127,29 @@ public class Numeracao implements Serializable {
 
 		return tiposPublicacoe;
 	}
+	@Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idNumeracao != null ? idNumeracao.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Numeracao)) {
+            return false;
+        }
+        Numeracao other = (Numeracao) object;
+        if ((this.idNumeracao == null && other.idNumeracao != null) 
+        		|| (this.idNumeracao != null && !this.idNumeracao.equals(other.idNumeracao))) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+    	return Utilitaria.getValueDef(this.getNmNumeracao(),"");
+    }
 }

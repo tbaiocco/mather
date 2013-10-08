@@ -2,8 +2,11 @@ package com.nuovonet.mather.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
+import com.nuovonet.mather.util.Utilitaria;
+
+import java.util.List;
+import com.nuovonet.mather.domain.util.AbstractEntity;
 
 /**
  * The persistent class for the paises database table.
@@ -12,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name="paises")
 @NamedQuery(name="Pais.findAll", query="SELECT p FROM Pais p")
-public class Pais implements Serializable {
+public class Pais extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -27,7 +30,7 @@ public class Pais implements Serializable {
 	private String nmPais;
 
 	//bi-directional many-to-one association to Estado
-	@OneToMany(mappedBy="pais")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="pais")
 	private List<Estado> estados;
 
 	public Pais() {
@@ -38,6 +41,7 @@ public class Pais implements Serializable {
 	}
 
 	public void setIdPais(Long idPais) {
+		super.setId(idPais);
 		this.idPais = idPais;
 	}
 
@@ -78,5 +82,30 @@ public class Pais implements Serializable {
 
 		return estado;
 	}
+
+	@Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idPais != null ? idPais.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Pais)) {
+            return false;
+        }
+        Pais other = (Pais) object;
+        if ((this.idPais == null && other.idPais != null) || (this.idPais != null && !this.idPais.equals(other.idPais))) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+    	return Utilitaria.getValueDef(this.getCdPais(),"") + " - " + Utilitaria.getValueDef(this.getNmPais(),"");
+    }
 
 }

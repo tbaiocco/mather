@@ -2,6 +2,10 @@ package com.nuovonet.mather.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.nuovonet.mather.domain.util.AbstractEntity;
+import com.nuovonet.mather.util.Utilitaria;
+
 import java.util.List;
 
 
@@ -10,8 +14,9 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Menus.findAll", query="SELECT m FROM Menus m")
-public class Menus implements Serializable {
+@Table(name="menus")
+@NamedQuery(name="Menus.findAll", query="SELECT m FROM Menu m")
+public class Menu extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -29,7 +34,7 @@ public class Menus implements Serializable {
 	@ManyToMany(mappedBy="menuses")
 	private List<Programa> programas;
 
-	public Menus() {
+	public Menu() {
 	}
 
 	public Long getIdMenu() {
@@ -37,6 +42,7 @@ public class Menus implements Serializable {
 	}
 
 	public void setIdMenu(Long idMenu) {
+		super.setId(idMenu);
 		this.idMenu = idMenu;
 	}
 
@@ -63,5 +69,29 @@ public class Menus implements Serializable {
 	public void setProgramas(List<Programa> programas) {
 		this.programas = programas;
 	}
+	@Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idMenu != null ? idMenu.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Menu)) {
+            return false;
+        }
+        Menu other = (Menu) object;
+        if ((this.idMenu == null && other.idMenu != null) 
+        		|| (this.idMenu != null && !this.idMenu.equals(other.idMenu))) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+    	return Utilitaria.getValueDef(this.getNmMenu(),"");
+    }
 }

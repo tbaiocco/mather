@@ -2,19 +2,104 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<h:form>
+	<h:form enctype="ISO-8859-1">
 		<p:menubar>
-			<p:submenu label="#{messages['menu.pais']}">
-				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/pais_edit.jsf"></p:menuitem>
-				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/pais_list.jsf"></p:menuitem>
+			<p:submenu label="#{messages['menu.empresa']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/empresa_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/empresa_list.jsf" icon="ui-icon-search"></p:menuitem>
 			</p:submenu>
 
-			<p:submenu label="#{messages['menu.perfil']}">
-				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/perfil_edit.jsf"></p:menuitem>
-				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/perfil_list.jsf"></p:menuitem>
+			<p:submenu label="#{messages['menu.escola']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/escola_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/escola_list.jsf" icon="ui-icon-search"></p:menuitem>
 			</p:submenu>
 
-			<p:menuitem value="#{messages['menu.menuitem.quit']}" url="http://www.frameworkdemoiselle.gov.br/"
+			<p:submenu label="#{messages['menu.unidade']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/unidade_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/unidade_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.usuario']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/usuario_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/usuario_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.pessoa']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/pessoa_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/pessoa_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.tipoServico']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/tipoServico_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/tipoServico_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.tipoSaida']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/tipoSaida_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/tipoSaida_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.tipoPublicacao']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/tipoPublicacao_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/tipoPublicacao_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.tipoOcorrencia']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/tipoOcorrencia_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/tipoOcorrencia_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.tipoChegada']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/tipoChegada_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/tipoChegada_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.tipoAtividade']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/tipoAtividade_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/tipoAtividade_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.sistema']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/sistema_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/sistema_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.programa']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/programa_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/programa_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.menus']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/menus_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/menus_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.numeracao']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/numeracao_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/numeracao_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.cidade']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/cidade_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/cidade_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.estado']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/estado_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/estado_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.pais']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/pais_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/pais_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.perfil']}" icon="ui-icon-folder-open">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/perfil_edit.jsf" icon="ui-icon-document"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/perfil_list.jsf" icon="ui-icon-search"></p:menuitem>
+			</p:submenu>
+
+			<p:menuitem value="#{messages['menu.menuitem.quit']}" url="http://www.nuovonet.com/" icon="ui-icon-close"
 				action="#{securityContext.logout}" />
 		</p:menubar>
 	</h:form>

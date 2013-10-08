@@ -110,7 +110,7 @@
 			<class>com.nuovonet.mather.domain.TipoSaida</class>
 			<class>com.nuovonet.mather.domain.TipoServico</class>
 			<class>com.nuovonet.mather.domain.TipoPublicacao</class>
-			<class>com.nuovonet.mather.domain.Menus</class>
+			<class>com.nuovonet.mather.domain.Menu</class>
 			<class>com.nuovonet.mather.domain.Estado</class>
 			<class>com.nuovonet.mather.domain.Cidade</class>
 			<class>com.nuovonet.mather.domain.Empresa</class>
